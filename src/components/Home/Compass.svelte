@@ -70,27 +70,25 @@
   ]
 </script>
 
-<div class="w-24 h-24 relative flex justify-center">
+<div class="relative">
   <!-- value -->
   <div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-center">
-    <div class="font-semibold">{velocity}</div>
-    <div class="text-sm fill-slate-500">km/h</div>
+    <div class="text-lg leading-none font-semibold">{velocity}</div>
+    <div class="text-xs text-slate-500">km/h</div>
   </div>
 
   <!-- cardinal points -->
-  <div class="text-[0.625em] font-semibold align-middle text-center">
-    <div class="absolute w-3 leading-3 top-2 left-1/2 -translate-x-1/2">N</div>
-    <div class="absolute w-3 leading-3 bottom-2 left-1/2 -translate-x-1/2">S</div>
-    <div class="absolute w-3 leading-3 top-1/2 right-2 -translate-y-1/2">E</div>
-    <div class="absolute w-3 leading-3 top-1/2 left-2 -translate-y-1/2">W</div>
+  <div class="text-[0.625rem] font-semibold text-slate-500 align-middle text-center">
+    <div class="absolute top-[10%] left-1/2 w-3 leading-3 -translate-x-1/2">N</div>
+    <div class="absolute bottom-[10%] left-1/2 w-3 leading-3 -translate-x-1/2">S</div>
+    <div class="absolute top-1/2 right-[10%] w-3 leading-3 -translate-y-1/2">E</div>
+    <div class="absolute top-1/2 left-[10%] w-3 leading-3 -translate-y-1/2">W</div>
   </div>
 
   <!-- directions -->
-  <svg viewBox="0 0 96 96" class="fill-slate-900">
-    <g class="fill-slate-200">
-      {#each SVG_DIRECITONS as d}
-        <path d={d.path} class={d.pos === direction ? 'fill-slate-900' : ''} />
-      {/each}
-    </g>
+  <svg viewBox="0 0 96 96" class="fill-slate-200">
+    {#each SVG_DIRECITONS as d}
+      <path d={d.path} class:fill-slate-900={d.pos === direction} />
+    {/each}
   </svg>
 </div>
