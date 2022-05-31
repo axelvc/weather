@@ -78,3 +78,14 @@
     <CardSection title="Moon Phase">Warning crecent</CardSection>
   </div>
 </Card>
+
+<Card title="More info">
+  <div class="grid gap-[inherit] grid-cols-2">
+    <CardSection title="Dew point">9°</CardSection>
+    <CardSection title="Visibility">16.10km</CardSection>
+    <CardSection title="Pressure">1023mb</CardSection>
+    <CardSection title="Precipitation ">0mm</CardSection>
+    <CardSection title="Chance of snow">0%</CardSection>
+    <CardSection title="Chance of rain">0%</CardSection>
+  </div>
+</Card>
