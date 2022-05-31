@@ -47,6 +47,5 @@
     fill: none;
     stroke-width: 6;
     stroke-linecap: round;
-    stroke-linecap: round;
   }
 </style>
