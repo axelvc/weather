@@ -26,66 +26,61 @@
   }
 </script>
 
-<Card title="Today">
-  <div class="grid gap-[inherit] grid-cols-2">
-    <CardSection title="Cloud Cover" titleClass="text-center" class="w-24">
-      <DialChart value={90} icon="☁️" suffix="%" />
-    </CardSection>
+<Card title="Today" class="grid-cols-2">
+  <CardSection title="Cloud Cover" class="grid gap-1 justify-center text-center">
+    <DialChart value={90} icon="☁️" suffix="%" />
+  </CardSection>
 
-    <CardSection title="Humidity" titleClass="text-center" class="w-24">
-      <DialChart value={65} icon="💧️" suffix="%" />
-    </CardSection>
+  <CardSection title="Humidity" class="grid gap-1 justify-center text-center">
+    <DialChart value={65} icon="💧️" suffix="%" />
+  </CardSection>
 
-    <CardSection title="UV Index" titleClass="text-center" class="w-24">
-      <DialChart value={2} total={11} icon="💡" />
-    </CardSection>
+  <CardSection title="UV Index" class="grid gap-1 justify-center text-center">
+    <DialChart value={2} total={11} icon="💡" />
+  </CardSection>
 
-    <CardSection title="Wind" titleClass="text-center" class="w-24">
-      <Compass velocity={22} direction={'N'} />
-    </CardSection>
-  </div>
+  <CardSection title="Wind" class="grid gap-1 justify-center text-center">
+    <Compass velocity={22} direction={'N'} />
+  </CardSection>
 </Card>
 
 <Card title="Forecast">
-  <Forecast title="Next Days" data={forecastData.days} />
-  <hr class="border-slate-200" />
-  <Forecast title="Next Hours" data={forecastData.hours} />
-</Card>
-
-<Card title="Sun & Moon">
-  <div class="grid gap-[inherit] grid-cols-2">
-    <CardSection title="Sunrise">
-      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
-    </CardSection>
-    <CardSection title="Sunset">
-      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
-    </CardSection>
-  </div>
+  <CardSection title="Next Days" class="grid">
+    <Forecast data={forecastData.days} />
+  </CardSection>
 
   <hr class="border-slate-200" />
 
-  <div class="grid gap-[inherit] grid-cols-2">
-    <CardSection title="Monrise">
-      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
-    </CardSection>
-    <CardSection title="Moonset">
-      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
-    </CardSection>
-  </div>
-
-  <div class="grid gap-[inherit] grid-cols-2">
-    <CardSection title="Moon Illumination">15%</CardSection>
-    <CardSection title="Moon Phase">Warning crecent</CardSection>
-  </div>
+  <CardSection title="Next Hours" class="grid">
+    <Forecast data={forecastData.hours} />
+  </CardSection>
 </Card>
 
-<Card title="More info">
-  <div class="grid gap-[inherit] grid-cols-2">
-    <CardSection title="Dew point">9°</CardSection>
-    <CardSection title="Visibility">16.10km</CardSection>
-    <CardSection title="Pressure">1023mb</CardSection>
-    <CardSection title="Precipitation ">0mm</CardSection>
-    <CardSection title="Chance of snow">0%</CardSection>
-    <CardSection title="Chance of rain">0%</CardSection>
-  </div>
+<Card title="Sun & Moon" class="grid-cols-2">
+  <CardSection title="Sunrise">
+    ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+  </CardSection>
+  <CardSection title="Sunset">
+    ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+  </CardSection>
+
+  <hr class="col-span-full border-slate-200" />
+
+  <CardSection title="Monrise">
+    ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+  </CardSection>
+  <CardSection title="Moonset">
+    ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+  </CardSection>
+  <CardSection title="Moon Illumination">15%</CardSection>
+  <CardSection title="Moon Phase">Warning crecent</CardSection>
+</Card>
+
+<Card title="More info" class="grid-cols-2">
+  <CardSection title="Dew point">9°</CardSection>
+  <CardSection title="Visibility">16.10km</CardSection>
+  <CardSection title="Pressure">1023mb</CardSection>
+  <CardSection title="Precipitation ">0mm</CardSection>
+  <CardSection title="Chance of snow">0%</CardSection>
+  <CardSection title="Chance of rain">0%</CardSection>
 </Card>

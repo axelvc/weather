@@ -70,10 +70,10 @@
   ]
 </script>
 
-<div class="relative">
+<div class="w-20 relative">
   <!-- value -->
   <div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-center">
-    <div class="text-lg leading-none font-semibold">{velocity}</div>
+    <div class="leading-none">{velocity}</div>
     <div class="text-xs text-slate-500">km/h</div>
   </div>
 

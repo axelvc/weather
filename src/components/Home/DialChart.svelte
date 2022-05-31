@@ -19,7 +19,7 @@
   })
 </script>
 
-<div class="relative flex justify-center">
+<div class="w-20 relative flex justify-center">
   <span class="absolute bottom-0 left-1/2 -translate-x-1/2">{icon}</span>
 
   <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
