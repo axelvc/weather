@@ -27,7 +27,7 @@
 </script>
 
 <Card title="Today">
-  <div class="grid gap-[inherit] grid-cols-2 grid-rows-2">
+  <div class="grid gap-[inherit] grid-cols-2">
     <CardSection title="Cloud Cover" titleClass="text-center" class="w-24">
       <DialChart value={90} icon="☁️" suffix="%" />
     </CardSection>
@@ -50,4 +50,31 @@
   <Forecast title="Next Days" data={forecastData.days} />
   <hr class="border-slate-200" />
   <Forecast title="Next Hours" data={forecastData.hours} />
+</Card>
+
+<Card title="Sun & Moon">
+  <div class="grid gap-[inherit] grid-cols-2">
+    <CardSection title="Sunrise">
+      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+    </CardSection>
+    <CardSection title="Sunset">
+      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+    </CardSection>
+  </div>
+
+  <hr class="border-slate-200" />
+
+  <div class="grid gap-[inherit] grid-cols-2">
+    <CardSection title="Monrise">
+      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+    </CardSection>
+    <CardSection title="Moonset">
+      ☀️ <time datetime={new Date().toISOString()}>6:57 AM</time>
+    </CardSection>
+  </div>
+
+  <div class="grid gap-[inherit] grid-cols-2">
+    <CardSection title="Moon Illumination">15%</CardSection>
+    <CardSection title="Moon Phase">Warning crecent</CardSection>
+  </div>
 </Card>
