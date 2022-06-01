@@ -18,7 +18,21 @@
 </script>
 
 {#await fetchWeather()}
-  <p>Awesome loading...</p>
+  <p class="sr-only">Loading</p>
+
+  <div class="relative animate-pulse grid place-items-center min-h-screen">
+    <div class="absolute top-3 left-3 space-y-2">
+      <div class="rounded-sm w-48 h-5 bg-slate-300" />
+      <div class="rounded-sm w-36 h-4 bg-slate-300" />
+    </div>
+
+    <div class="space-y-2 grid justify-items-center">
+      <div class="w-56 h-40 rounded-md bg-slate-300" />
+      <div class="w-56 h-5 rounded-sm bg-slate-300" />
+      <div class="w-56 h-5 rounded-sm bg-slate-300" />
+      <div class="w-56 h-5 rounded-sm bg-slate-300" />
+    </div>
+  </div>
 {:then { current, location, forecast }}
   <section class="sticky top-0 grid place-items-center min-h-screen">
     <div class="absolute top-2 left-3 ">
