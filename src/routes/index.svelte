@@ -8,6 +8,7 @@
   import getWeather from '@/services/weather.service'
   import Time from '@/components/common/Time.svelte'
   import Temp from '@/components/Home/Temp.svelte'
+  import Skeleton from '@/components/common/Skeleton.svelte'
 
   const weatherData = new Promise<Weather>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -20,17 +21,17 @@
   {#await weatherData}
     <p class="sr-only">Loading</p>
 
-    <div class="relative animate-pulse grid place-items-center md:w-screen h-screen">
+    <div class="relative grid place-items-center md:w-screen h-screen">
       <div class="absolute top-3 left-3 space-y-2">
-        <div class="rounded-sm w-48 h-5 bg-slate-300" />
-        <div class="rounded-sm w-36 h-4 bg-slate-300" />
+        <Skeleton class="w-48 h-5" />
+        <Skeleton class="w-36 h-4" />
       </div>
 
       <div class="space-y-2 grid justify-items-center">
-        <div class="w-56 h-40 rounded-md bg-slate-300" />
-        <div class="w-56 h-5 rounded-sm bg-slate-300" />
-        <div class="w-56 h-5 rounded-sm bg-slate-300" />
-        <div class="w-56 h-5 rounded-sm bg-slate-300" />
+        <Skeleton class="w-64 h-40" />
+        <Skeleton class="w-52 h-5" />
+        <Skeleton class="w-56 h-5" />
+        <Skeleton class="w-52 h-5" />
       </div>
     </div>
   {:then { current, location, forecast }}
@@ -49,9 +50,7 @@
 
         <p>
           Feels like
-          <Temp>
-            {current.temp.feels.c}
-          </Temp>
+          <Temp>{current.temp.feels.c}</Temp>
         </p>
 
         <div>
@@ -74,12 +73,10 @@
 
   <div class=" w-full md:max-w-lg -translate-y-20 sm:translate-y-0">
     {#await weatherData}
-      <div class="animate-pulse">
-        <div class="rounded-sm aspect-video mx-3 my-6 bg-slate-300" />
-        <div class="rounded-sm aspect-video mx-3 my-6 bg-slate-300" />
-        <div class="rounded-sm aspect-video mx-3 my-6 bg-slate-300" />
-        <div class="rounded-sm aspect-video mx-3 my-6 bg-slate-300" />
-      </div>
+      <Skeleton class="aspect-video mx-3 my-6" />
+      <Skeleton class="aspect-video mx-3 my-6" />
+      <Skeleton class="aspect-video mx-3 my-6" />
+      <Skeleton class="aspect-video mx-3 my-6" />
     {:then { current, forecast }}
       <Card title="Today" class="grid-cols-2 shadow-[0_-20px_50px_-15px]">
         <div slot="pre" class="md:hidden col-span-full h-8">
