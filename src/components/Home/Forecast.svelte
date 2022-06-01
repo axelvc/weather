@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Forecast } from '@/services/weather.service'
-  import Time from '../common/Card/Time.svelte'
+  import Time from '../common/Time.svelte'
+  import Temp from './Temp.svelte'
 
   export let data: Forecast[]
   export let formatOptions: Intl.DateTimeFormatOptions
@@ -16,7 +17,7 @@
 
         <img src={item.condition.icon} alt={item.condition.text} class="w-8 m-auto" />
 
-        <div>{item.temp.c}°</div>
+        <Temp>{item.temp.c}</Temp>
       </article>
     </li>
   {/each}

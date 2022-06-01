@@ -6,7 +6,8 @@
   import Compass from '@/components/Home/Compass.svelte'
   import Forecast from '@/components/Home/Forecast.svelte'
   import getWeather from '@/services/weather.service'
-  import Time from '@/components/common/Card/Time.svelte'
+  import Time from '@/components/common/Time.svelte'
+  import Temp from '@/components/Home/Temp.svelte'
 
   function fetchWeather(): Promise<Weather> {
     return new Promise((resolve, reject) => {
@@ -42,17 +43,36 @@
       </p>
     </div>
 
-    <div class="text-center my-16">
-      <span class="text-[10rem] leading-none font-semibold">
-        {current.temp.real.c}<span class="text-8xl align-top">°</span>
-      </span>
-      <p>Feels like {current.temp.feels.c}°</p>
+    <div class="text-center">
+      <Temp class="text-[10rem] leading-none font-semibold after:text-8xl after:align-top">
+        {current.temp.real.c}
+      </Temp>
+
+      <p>
+        Feels like
+        <Temp>
+          {current.temp.feels.c}
+        </Temp>
+      </p>
+
       <div>
         <p class="inline">{current.condition.text}</p>
         <img src={current.condition.icon} alt="" class="inline w-6" />
       </div>
-      <span>🔽 {forecast.today.temp.min.c}°</span>
-      <span>🔼 {forecast.today.temp.max.c}°</span>
+
+      <span>
+        🔽
+        <Temp>
+          {forecast.today.temp.min.c}
+        </Temp>
+      </span>
+
+      <span>
+        🔼
+        <Temp>
+          {forecast.today.temp.max.c}
+        </Temp>
+      </span>
     </div>
   </section>
 
@@ -112,17 +132,33 @@
         ☀️
         <Time date={forecast.today.astro.moonset} />
       </CardSection>
-      <CardSection title="Moon Phase">{forecast.today.astro.moonPhase}</CardSection>
-      <CardSection title="Moon Illumination">{forecast.today.astro.moonIllumination}%</CardSection>
+      <CardSection title="Moon Phase">
+        {forecast.today.astro.moonPhase}
+      </CardSection>
+      <CardSection title="Moon Illumination">
+        {forecast.today.astro.moonIllumination}%
+      </CardSection>
     </Card>
 
     <Card title="More info" class="grid-cols-2">
-      <CardSection title="Dew point">{forecast.today.temp.dewPoint.c}°</CardSection>
-      <CardSection title="Visibility">{current.visibility.km}km</CardSection>
-      <CardSection title="Pressure">{current.pressure.mb}mb</CardSection>
-      <CardSection title="Precipitation ">{current.precipitation.mm}mm</CardSection>
-      <CardSection title="Chance of snow">{forecast.today.snowChange}%</CardSection>
-      <CardSection title="Chance of rain">{forecast.today.rainChange}%</CardSection>
+      <CardSection title="Dew point">
+        <Temp>{forecast.today.temp.dewPoint.c}</Temp>
+      </CardSection>
+      <CardSection title="Visibility">
+        {current.visibility.km} km
+      </CardSection>
+      <CardSection title="Pressure">
+        {current.pressure.mb} mb
+      </CardSection>
+      <CardSection title="Precipitation ">
+        {current.precipitation.mm} mm
+      </CardSection>
+      <CardSection title="Chance of snow">
+        {forecast.today.snowChange}%
+      </CardSection>
+      <CardSection title="Chance of rain">
+        {forecast.today.rainChange}%
+      </CardSection>
     </Card>
   </div>
 {/await}

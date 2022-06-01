@@ -65,7 +65,7 @@ export interface Weather {
         moonrise: Date
         moonset: Date
         moonPhase: string
-        moonIllumination: string
+        moonIllumination: number
       }
     }
     hours: Forecast[]
@@ -154,7 +154,7 @@ export default async function getWeather(location: string): Promise<Weather> {
           moonrise: getAstroDate(todayForecast.astro.moonrise),
           moonset: getAstroDate(todayForecast.astro.moonset),
           moonPhase: todayForecast.astro.moon_phase,
-          moonIllumination: todayForecast.astro.moon_illumination,
+          moonIllumination: Number(todayForecast.astro.moon_illumination),
         },
       },
       hours: todayForecast.hour.map((hour: any) => ({

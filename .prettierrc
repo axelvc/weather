@@ -5,6 +5,7 @@
   "bracketSpacing": true,
   "trailingComma": "all",
   "arrowParens": "avoid",
+  "htmlWhitespaceSensitivity": "ignore",
   "endOfLine": "lf",
   "printWidth": 120
 }
