@@ -80,7 +80,7 @@ export default async function getWeather(location: string): Promise<Weather> {
   const { current: c, forecast: f, location: l } = await res.json()
 
   const isDay = Boolean(c.is_day)
-  const today = new Date(c.last_updated)
+  const today = new Date(c.last_updated_epoch)
   const todayForecast = f.forecastday[0]
 
   function getAstroDate(time: string): Date {

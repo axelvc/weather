@@ -6,4 +6,4 @@
   const localeTime = date.toLocaleString('en', formatOptions)
 </script>
 
-<time {...$$props} datetime={isoDate}>{localeTime}</time>
+<time {...$$restProps} datetime={isoDate}>{localeTime}</time>
