@@ -7,7 +7,6 @@ interface Temp {
 interface Condition {
   text: string
   icon: string
-  code: number
 }
 
 export interface Forecast {
@@ -64,7 +63,10 @@ export interface Weather {
         sunset: Date
         moonrise: Date
         moonset: Date
-        moonPhase: string
+        moonPhase: {
+          name: string
+          icon: string
+        }
         moonIllumination: number
       }
     }
@@ -77,6 +79,7 @@ export default async function getWeather(location: string): Promise<Weather> {
   const res = await fetch(`/api/weather?location=${location}`)
   const { current: c, forecast: f, location: l } = await res.json()
 
+  const isDay = Boolean(c.is_day)
   const today = new Date(c.last_updated)
   const todayForecast = f.forecastday[0]
 
@@ -86,10 +89,14 @@ export default async function getWeather(location: string): Promise<Weather> {
     return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, minute)
   }
 
+  function getConditionIcon(code: number): string {
+    return `condition/${isDay ? 'day' : 'night'}/${code}`
+  }
+
   return {
     current: {
+      isDay,
       lastUpdated: today,
-      isDay: Boolean(c.is_day),
       humidity: c.humidity,
       cloud: c.cloud,
       uvIndex: c.uv,
@@ -105,8 +112,7 @@ export default async function getWeather(location: string): Promise<Weather> {
       },
       condition: {
         text: c.condition.text,
-        icon: c.condition.icon,
-        code: c.condition.code,
+        icon: getConditionIcon(c.condition.code),
       },
       wind: {
         kph: c.wind_kph,
@@ -153,7 +159,10 @@ export default async function getWeather(location: string): Promise<Weather> {
           sunset: getAstroDate(todayForecast.astro.sunset),
           moonrise: getAstroDate(todayForecast.astro.moonrise),
           moonset: getAstroDate(todayForecast.astro.moonset),
-          moonPhase: todayForecast.astro.moon_phase,
+          moonPhase: {
+            name: todayForecast.astro.moon_phase,
+            icon: `moon/${todayForecast.astro.moon_phase.replaceAll(' ', '_').toLowerCase()}`,
+          },
           moonIllumination: Number(todayForecast.astro.moon_illumination),
         },
       },
@@ -165,8 +174,7 @@ export default async function getWeather(location: string): Promise<Weather> {
         },
         condition: {
           text: hour.condition.text,
-          icon: hour.condition.icon,
-          code: hour.condition.code,
+          icon: getConditionIcon(hour.condition.code),
         },
       })),
       days: f.forecastday.map(({ day, date }: any) => ({
@@ -177,8 +185,7 @@ export default async function getWeather(location: string): Promise<Weather> {
         },
         condition: {
           text: day.condition.text,
-          icon: day.condition.icon,
-          code: day.condition.code,
+          icon: getConditionIcon(day.condition.code),
         },
       })),
     },

@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { Forecast } from '@/services/weather.service'
-  import Time from '../common/Time.svelte'
-  import Temp from './Temp.svelte'
+  import Time from '@/components/common/Time.svelte'
+  import Temp from '@/components/Home/Temp.svelte'
+  import Icon from '@/components/common/Icon.svelte'
 
   export let data: Forecast[]
   export let formatOptions: Intl.DateTimeFormatOptions
@@ -15,7 +16,7 @@
           <Time date={item.date} {formatOptions} class="text-slate-500" />
         </h2>
 
-        <img src={item.condition.icon} alt={item.condition.text} class="w-8 m-auto" />
+        <Icon name={item.condition.icon} alt={item.condition.text} class="!block !w-8 !h-8 m-auto" />
 
         <Temp>{item.temp.c}</Temp>
       </article>

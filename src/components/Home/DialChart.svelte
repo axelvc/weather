@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import Icon from '@/components/common/Icon.svelte'
   export let total = 100
   export let value: number
   export let icon: string
@@ -20,7 +21,9 @@
 </script>
 
 <div class="w-20 relative flex justify-center">
-  <span class="absolute bottom-0 left-1/2 -translate-x-1/2">{icon}</span>
+  <span class="absolute bottom-0 left-1/2 -translate-x-1/2">
+    <Icon name={icon} />
+  </span>
 
   <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
     {value}{suffix}
