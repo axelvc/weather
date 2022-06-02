@@ -23,3 +23,12 @@
     </li>
   {/each}
 </ol>
+
+<style>
+  ol::-webkit-scrollbar {
+    @apply h-2;
+  }
+  ol::-webkit-scrollbar-track {
+    @apply bg-slate-200;
+  }
+</style>
