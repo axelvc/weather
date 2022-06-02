@@ -19,10 +19,10 @@
 </script>
 
 <main class="md:flex">
-  {#await weatherData}
-    <p class="sr-only">Loading</p>
+  <div class="sticky top-0 grid place-items-center md:w-screen h-screen">
+    {#await weatherData}
+      <p class="sr-only">Loading</p>
 
-    <div class="relative grid place-items-center md:w-screen h-screen">
       <div class="absolute top-3 left-3 space-y-2">
         <Skeleton class="w-48 h-5" />
         <Skeleton class="w-36 h-4" />
@@ -34,9 +34,7 @@
         <Skeleton class="w-56 h-5" />
         <Skeleton class="w-52 h-5" />
       </div>
-    </div>
-  {:then { current, location, forecast }}
-    <section class="sticky top-0 grid place-items-center md:w-screen h-screen">
+    {:then { current, location, forecast }}
       <div class="absolute top-2 left-3 ">
         <p class="text-lg">{location.country}, {location.name}</p>
         <p class="text-sm text-slate-500">
@@ -71,10 +69,10 @@
           </span>
         </div>
       </div>
-    </section>
-  {/await}
+    {/await}
+  </div>
 
-  <div class=" w-full md:max-w-lg -translate-y-20 sm:translate-y-0">
+  <div class=" w-full md:max-w-lg -translate-y-20 sm:translate-y-0 bg-slate-100">
     {#await weatherData}
       <Skeleton class="aspect-video mx-3 my-6" />
       <Skeleton class="aspect-video mx-3 my-6" />
