@@ -12,9 +12,14 @@
   import Icon from '@/components/common/Icon.svelte'
 
   const weatherData = new Promise<Weather>((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      getWeather(`${coords.latitude},${coords.longitude}`).then(resolve).catch(reject)
-    }, reject)
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        getWeather(`${coords.latitude},${coords.longitude}`).then(resolve).catch(reject)
+      },
+      () => {
+        getWeather('auto:ip').then(resolve).catch(reject)
+      },
+    )
   })
 </script>
 
