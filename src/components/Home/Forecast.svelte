@@ -18,7 +18,7 @@
 
         <Icon name={item.condition.icon} alt={item.condition.text} class="!block !w-8 !h-8 m-auto" />
 
-        <Temp>{item.temp.c}</Temp>
+        <Temp temp={item.temp.c} />
       </article>
     </li>
   {/each}

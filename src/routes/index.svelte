@@ -10,6 +10,7 @@
   import Temp from '@/components/Home/Temp.svelte'
   import Skeleton from '@/components/common/Skeleton.svelte'
   import Icon from '@/components/common/Icon.svelte'
+  import AnimatedNumber from '@/components/common/AnimatedNumber.svelte'
 
   const weatherData = new Promise<Weather>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
@@ -48,13 +49,14 @@
       </div>
 
       <div class="text-center sm:w-96 space-y-2">
-        <Temp class="text-[10rem] leading-none font-semibold after:absolute after:text-8xl after:align-top">
-          {current.temp.real.c}
-        </Temp>
+        <Temp
+          temp={current.temp.real.c}
+          class="text-[10rem] leading-none font-semibold after:absolute after:text-8xl after:align-top"
+        />
 
         <p>
           Feels like
-          <Temp>{current.temp.feels.c}</Temp>
+          <Temp temp={current.temp.feels.c} />
         </p>
 
         <p>
@@ -65,12 +67,12 @@
         <div>
           <span>
             <Icon name="down" />
-            <Temp>{forecast.today.temp.min.c}</Temp>
+            <Temp temp={forecast.today.temp.min.c} />
           </span>
 
           <span>
             <Icon name="up" />
-            <Temp>{forecast.today.temp.max.c}</Temp>
+            <Temp temp={forecast.today.temp.max.c} />
           </span>
         </div>
       </div>
@@ -152,23 +154,25 @@
       <Card title="More info" class="grid-cols-2">
         <CardSection title="Dew point">
           <Icon name="drop" />
-          <Temp>{forecast.today.temp.dewPoint.c}</Temp>
+          <Temp temp={forecast.today.temp.dewPoint.c} />
         </CardSection>
         <CardSection title="Visibility">
           <Icon name="eye" />
-          {current.visibility.km} km
+          <AnimatedNumber value={current.visibility.km} />
+          km
         </CardSection>
         <CardSection title="Pressure">
           <Icon name="measure" />
-          {current.pressure.mb} mb
+          <AnimatedNumber value={current.pressure.mb} />
+          mb
         </CardSection>
         <CardSection title="Precipitation ">
           <Icon name="drop" />
-          {current.precipitation.mm} mm
+          <AnimatedNumber value={current.precipitation.mm} />
+          mm
         </CardSection>
         <CardSection title="Chance of snow">
-          <Icon name="snow" />
-          {forecast.today.snowChange}%
+          <AnimatedNumber value={forecast.today.snowChange} />%
         </CardSection>
         <CardSection title="Chance of rain">
           <Icon name="water" />
