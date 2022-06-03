@@ -1,8 +1,8 @@
 <script lang="ts">
   import { tweened } from 'svelte/motion'
   import { cubicOut } from 'svelte/easing'
-  import Icon from '@/components/common/Icon.svelte'
   import AnimatedNumber from '@/components/common/AnimatedNumber.svelte'
+  import Icon from '@/components/common/Icon.svelte'
   export let total = 100
   export let value: number
   export let icon: string

@@ -3,4 +3,4 @@
   export let alt = ''
 </script>
 
-<img class={`inline-block h-6 w-6 align-bottom ${$$props.class || ''}`} src={`icons/${name}.svg`} {alt} />
+<img class={`inline-block select-none h-6 w-6 align-bottom ${$$props.class || ''}`} src={`icons/${name}.svg`} {alt} />

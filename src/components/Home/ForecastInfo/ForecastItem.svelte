@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Forecast } from '@/services/weather.service'
-  import Time from '@/components/common/Time.svelte'
-  import Temp from '@/components/Home/Temp.svelte'
   import Icon from '@/components/common/Icon.svelte'
+  import Temp from '@/components/Home/Util/Temp.svelte'
+  import Time from '@/components/common/Time.svelte'
 
   export let data: Forecast[]
   export let formatOptions: Intl.DateTimeFormatOptions

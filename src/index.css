@@ -9,6 +9,11 @@
     @apply tracking-wide;
   }
 
+  ::selection {
+    @apply bg-slate-900;
+    @apply text-slate-100;
+  }
+
   ::-webkit-scrollbar {
     @apply w-3 h-3;
   }
