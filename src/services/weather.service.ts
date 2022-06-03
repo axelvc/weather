@@ -19,6 +19,7 @@ export interface Weather {
   location: {
     country: string
     name: string
+    timezone: string
   }
   current: {
     lastUpdated: Date
@@ -59,10 +60,10 @@ export interface Weather {
         dewPoint: Temp
       }
       astro: {
-        sunrise: Date
-        sunset: Date
-        moonrise: Date
-        moonset: Date
+        sunrise: string
+        sunset: string
+        moonrise: string
+        moonset: string
         moonPhase: {
           name: string
           icon: string
@@ -75,19 +76,23 @@ export interface Weather {
   }
 }
 
+async function fetchWeather(location: string) {
+  const r = await fetch(`/api/weather?location=${location}`)
+  return await r.json()
+}
+
+async function fetchTimezone(location: string) {
+  const r = await fetch(`/api/timezone?location=${location}`)
+  return await r.json()
+}
+
 export default async function getWeather(location: string): Promise<Weather> {
-  const res = await fetch(`/api/weather?location=${location}`)
-  const { current: c, forecast: f, location: l } = await res.json()
-
+  const { current: c, forecast: f, location: l } = await fetchWeather(location)
+  const { timezone } = await fetchTimezone(location)
   const isDay = Boolean(c.is_day)
-  const today = new Date(c.last_updated_epoch)
+
+  const lastUpdated = new Date(c.last_updated_epoch * 1000)
   const todayForecast = f.forecastday[0]
-
-  function getAstroDate(time: string): Date {
-    const [hour, minute] = time.split(' ')[0].split(':').map(Number)
-
-    return new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, minute)
-  }
 
   function getConditionIcon(code: number): string {
     return `condition/${isDay ? 'day' : 'night'}/${code}`
@@ -96,7 +101,7 @@ export default async function getWeather(location: string): Promise<Weather> {
   return {
     current: {
       isDay,
-      lastUpdated: today,
+      lastUpdated,
       humidity: c.humidity,
       cloud: c.cloud,
       uvIndex: c.uv,
@@ -133,6 +138,7 @@ export default async function getWeather(location: string): Promise<Weather> {
       },
     },
     location: {
+      timezone,
       country: l.country,
       name: l.name,
     },
@@ -150,15 +156,15 @@ export default async function getWeather(location: string): Promise<Weather> {
             f: todayForecast.day.maxtemp_f,
           },
           dewPoint: {
-            c: todayForecast.hour[today.getHours()].dewpoint_c,
-            f: todayForecast.hour[today.getHours()].dewpoint_f,
+            c: todayForecast.hour[lastUpdated.getHours()].dewpoint_c,
+            f: todayForecast.hour[lastUpdated.getHours()].dewpoint_f,
           },
         },
         astro: {
-          sunrise: getAstroDate(todayForecast.astro.sunrise),
-          sunset: getAstroDate(todayForecast.astro.sunset),
-          moonrise: getAstroDate(todayForecast.astro.moonrise),
-          moonset: getAstroDate(todayForecast.astro.moonset),
+          sunrise: todayForecast.astro.sunrise,
+          sunset: todayForecast.astro.sunset,
+          moonrise: todayForecast.astro.moonrise,
+          moonset: todayForecast.astro.moonset,
           moonPhase: {
             name: todayForecast.astro.moon_phase,
             icon: `moon/${todayForecast.astro.moon_phase.replaceAll(' ', '_').toLowerCase()}`,
@@ -167,7 +173,7 @@ export default async function getWeather(location: string): Promise<Weather> {
         },
       },
       hours: todayForecast.hour.map((hour: any) => ({
-        date: new Date(hour.time),
+        date: new Date(hour.time_epoch * 1000),
         temp: {
           c: hour.temp_c,
           f: hour.temp_f,
@@ -177,8 +183,8 @@ export default async function getWeather(location: string): Promise<Weather> {
           icon: getConditionIcon(hour.condition.code),
         },
       })),
-      days: f.forecastday.map(({ day, date }: any) => ({
-        date: new Date(date),
+      days: f.forecastday.map(({ day, date_epoch }: any) => ({
+        date: new Date(date_epoch * 1000),
         temp: {
           c: day.avgtemp_c,
           f: day.avgtemp_f,

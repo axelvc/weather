@@ -6,18 +6,18 @@
   import ForecastItem from '@/components/Home/ForecastInfo/ForecastItem.svelte'
   export let weather: Weather
 
-  const { forecast } = weather
+  const { forecast, location } = weather
   const { days, hours } = forecast
 </script>
 
 <Card title="Forecast">
-  <CardSection title="Next Days" class="grid">
-    <ForecastItem data={days} formatOptions={{ weekday: 'short' }} />
+  <CardSection title="Days" class="grid">
+    <ForecastItem data={days} formatOptions={{ weekday: 'short', timeZone: 'UTC' }} />
   </CardSection>
 
   <Divisor />
 
-  <CardSection title="Next Hours" class="grid">
-    <ForecastItem data={hours} formatOptions={{ hour: 'numeric' }} />
+  <CardSection title="Hours" class="grid">
+    <ForecastItem data={hours} formatOptions={{ hour: 'numeric', timeZone: location.timezone }} />
   </CardSection>
 </Card>

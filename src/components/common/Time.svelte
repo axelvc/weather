@@ -1,9 +1,9 @@
 <script lang="ts">
   export let date: Date
-  export let formatOptions: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' }
+  export let formatOptions: Intl.DateTimeFormatOptions | undefined
 
   const isoDate = date.toISOString()
-  const localeTime = date.toLocaleString('en', formatOptions)
+  const localeTime = date.toLocaleString(navigator.language, formatOptions)
 </script>
 
 <time {...$$restProps} datetime={isoDate}>{localeTime}</time>

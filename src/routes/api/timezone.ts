@@ -11,10 +11,12 @@ export async function get(req: RequestEvent) {
     }
   }
 
-  const res = await api.get(`forecast.json?q=${location}&days=3`)
+  const res = await api.get(`timezone.json?q=${location}`)
   const json = await res.json()
 
   return {
-    body: json,
+    body: {
+      timezone: json.location.tz_id,
+    },
   }
 }

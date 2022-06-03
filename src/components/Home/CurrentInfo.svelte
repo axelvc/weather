@@ -13,7 +13,10 @@
   <div class="absolute top-2 left-3">
     <p class="text-lg">{location.country}, {location.name}</p>
     <p class="text-sm text-slate-500">
-      Last update at: <Time date={current.lastUpdated} />
+      Last update at: <Time
+        date={current.lastUpdated}
+        formatOptions={{ hour: '2-digit', minute: '2-digit', timeZone: location.timezone }}
+      />
     </p>
   </div>
 

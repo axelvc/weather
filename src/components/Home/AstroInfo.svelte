@@ -5,7 +5,6 @@
   import CardSection from '@/components/common/Card/CardSection.svelte'
   import Divisor from '@/components/common/Divisor.svelte'
   import Icon from '@/components/common/Icon.svelte'
-  import Time from '@/components/common/Time.svelte'
   export let weather: Weather
 
   const { sunrise, sunset, moonrise, moonset, moonPhase, moonIllumination } = weather.forecast.today.astro
@@ -15,14 +14,14 @@
   <CardSection title="Sunrise">
     <CardDetail>
       <Icon name="sunrise" />
-      <Time date={sunrise} />
+      {sunrise}
     </CardDetail>
   </CardSection>
 
   <CardSection title="Sunset">
     <CardDetail>
       <Icon name="sunset" />
-      <Time date={sunset} />
+      {sunset}
     </CardDetail>
   </CardSection>
 
@@ -31,14 +30,14 @@
   <CardSection title="Monrise">
     <CardDetail>
       <Icon name="moonrise" />
-      <Time date={moonrise} />
+      {moonrise}
     </CardDetail>
   </CardSection>
 
   <CardSection title="Moonset">
     <CardDetail>
       <Icon name="moonset" />
-      <Time date={moonset} />
+      {moonset}
     </CardDetail>
   </CardSection>
 
